@@ -1,0 +1,28 @@
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.Form1.resources
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.Properties.Resources.resources
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.csproj.GenerateResource.cache
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.csproj.CoreCompileInputs.cache
+C:\Users\MRS\source\repos\FourierTransformVisualisation\bin\Debug\FourierTransformVisualisation.exe.config
+C:\Users\MRS\source\repos\FourierTransformVisualisation\bin\Debug\FourierTransformVisualisation.exe
+C:\Users\MRS\source\repos\FourierTransformVisualisation\bin\Debug\FourierTransformVisualisation.pdb
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.exe
+C:\Users\MRS\source\repos\FourierTransformVisualisation\obj\Debug\FourierTransformVisualisation.pdb
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\bin\Debug\FourierTransformVisualisation.exe.config
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\bin\Debug\FourierTransformVisualisation.exe
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\bin\Debug\FourierTransformVisualisation.pdb
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.Form1.resources
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.Properties.Resources.resources
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.csproj.GenerateResource.cache
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.csproj.CoreCompileInputs.cache
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.exe
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.pdb
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_addition\obj\Debug\FourierTransformVisualisation.csprojAssemblyReference.cache
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\bin\Debug\FourierTransformVisualisation.exe.config
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\bin\Debug\FourierTransformVisualisation.exe
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\bin\Debug\FourierTransformVisualisation.pdb
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.Form1.resources
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.Properties.Resources.resources
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.csproj.GenerateResource.cache
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.csproj.CoreCompileInputs.cache
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.exe
+F:\From Disk Windows 7 SSD\Visual Studio Projects\FourierTransformVisualisation_modern_UI\obj\Debug\FourierTransformVisualisation.pdb
