@@ -6,7 +6,8 @@ from dataclasses import dataclass, field, fields, asdict, astuple
 
 import numpy as np
 
-from particle import *
+from Particle import Particle
+
 
 @dataclass
 class PSO:
@@ -62,7 +63,7 @@ class PSO:
             # r1, r2 - random float between 0 and 1
             p.velocity = self.inertia * p.velocity + self.personalComponent * random.random() * (
                     p.personalBestPosition - p.position) + self.groupComponent * random.random() * (
-                                     groupBestPos - p.position)
+                                 groupBestPos - p.position)
             p.position = p.position + p.velocity
             self.UpdatePB(p)
 
@@ -102,6 +103,7 @@ class PSO:
 
     def GetResult(self):
         return (self._resultPos, self._resultValue)
+
 
 def test():
     pso = PSO()

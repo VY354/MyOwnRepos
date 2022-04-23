@@ -8,7 +8,7 @@ import matplotlib.animation as animation
 
 from PSO_Algorithm import PSO
 
-def vusialize(pso: PSO,saveGIF=False):
+def vusialize(pso: PSO):
     dx = pso.deltaCoordinates[0]
     dy = pso.deltaCoordinates[1]
 
@@ -49,16 +49,10 @@ def vusialize(pso: PSO,saveGIF=False):
 
     anim = animation.FuncAnimation(fig=fig, func=anim, interval=1000, blit=False, frames=100)
 
-    if saveGIF:
-        path = r"file.gif"
-        matplotlib.rcParams[
-            'animation.ffmpeg_path'] = r"F:\FromWin7SSD\PROGRAMMS\ffmpeg\ffmpeg-4.4-full_build\bin\ffmpeg.exe"
-        writervideo = matplotlib.animation.FFMpegWriter(fps=1)
-        anim.save(path,writervideo)
-
     plt.interactive(False)
     plt.tight_layout()
     plt.show()
+
 
 if __name__ == '__main__':
     vusialize()
