@@ -1,0 +1,13 @@
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.AssemblyInfoInputs.cache
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.AssemblyInfo.cs
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.csproj.CoreCompileInputs.cache
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.exe
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.deps.json
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.runtimeconfig.json
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.runtimeconfig.dev.json
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.dll
+C:\Users\MRS\source\repos\Ant Algorithm Console\bin\Debug\netcoreapp3.1\Ant Algorithm Console.pdb
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.dll
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.pdb
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.genruntimeconfig.cache
+C:\Users\MRS\source\repos\Ant Algorithm Console\obj\Debug\netcoreapp3.1\Ant Algorithm Console.csprojAssemblyReference.cache
