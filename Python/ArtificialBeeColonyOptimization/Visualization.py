@@ -43,9 +43,11 @@ def visualize(abc: ABC):
         resPosText.set_text(f"coordinates: {[round(x, 3) for x in result[0]]}")
         resValText.set_text(f"value: {result[1]:.3f}")
 
+        print(list(map(lambda x: round(x, 3), result[0])), round(result[1], 3))
+
         return scatBees, iterText,
 
-    anim = animation.FuncAnimation(fig=fig, func=anim, interval=100, blit=False)
+    anim = animation.FuncAnimation(fig=fig, func=anim, interval=1000, blit=False)
 
     plt.interactive(False)
     plt.tight_layout()

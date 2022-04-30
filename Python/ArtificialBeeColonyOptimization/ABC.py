@@ -83,11 +83,12 @@ class ABC:
 
         fitSum = np.sum([self.__fitness(b.position) for b in self.__bees], axis=0)
         solutionProbList = np.array([self.__fitness(b.position) / fitSum for b in self.__bees])
+        maxProb = np.max(solutionProbList)
 
         while beeIndex < len(self.__bees):
             if solutionIndex >= np.shape(solutionProbList)[0]:
                 solutionIndex = 0
-            rndNum = random.uniform(0, 1 / (len(self.__bees) / 2))
+            rndNum = random.uniform(0, maxProb)
             if rndNum <= solutionProbList[solutionIndex]:
                 b: Bee
                 b = self.__bees[beeIndex]
@@ -109,27 +110,23 @@ class ABC:
         if stuckedBees:
             b: Bee
             b = random.choice(stuckedBees)
-            b.position = np.array([self.lb + random.uniform(0, 1) * (self.ub - self.lb), self.lb + random.uniform(0, 1) * (self.ub - self.lb)])
+            b.position = np.array([self.lb + random.uniform(0, 1) * (self.ub - self.lb),
+                                   self.lb + random.uniform(0, 1) * (self.ub - self.lb)])
             b.trial = 0
 
     # generate new solution
     def generateNewSolution(self, b: Bee):
         # for each bee:
         # randomly take other bee
-        # randomly choose coordinate to change
         # change coordinate according to  formula
 
         partner: Bee
         partner = random.choice([bb for bb in self.__bees if bb is not b])
-        coordIndex = random.randint(0, np.shape(b.position)[0] - 1)
 
-        # upd rule: X_ij_new = X_ij + rand(0,1)*(X_ij - X_kj), where
+        # upd rule: X_i_new = X_i + rand(0,1)*(X_i - X_k), where
         # i - current bee
         # k - other bee
-        # j - coordinate of position
-        newCoordValue = b.position[coordIndex] + random.uniform(-1, 1) * (b.position[coordIndex] - partner.position[coordIndex])
-        newPos = b.position
-        newPos[coordIndex] = newCoordValue
+        newPos = b.position + random.uniform(-1, 1) * (np.array(b.position) - np.array(partner.position))
         newPos = list(map(lambda x: self.lb if x <= self.lb else (self.ub if x >= self.ub else x), newPos))
 
         return newPos
@@ -137,9 +134,10 @@ class ABC:
     # calculate fitness
     def __fitness(self, pos: np.array):
         funcValue = self.optimizationFunction(*pos)
-        return 1.0 / (1.0 + funcValue) if funcValue >= 0 else 1.0 + abs(funcValue)
-        # return exp(funcValue)
-        # return funcValue
+        if self.optimizationAction == True:
+            return exp(funcValue)
+        elif self.optimizationAction == False:
+            return 1.0 / (1.0 + funcValue) if funcValue >= 0 else 1.0 + abs(funcValue)
 
     def updateBee(self, b: Bee, newPos: np.array):
         currFitness = self.__fitness(b.position)

@@ -1,40 +1,42 @@
 from math import *
 import numpy as np
 
-from PSO_Algorithm import PSO
-import Visualizing
+from PSO import PSO
+import Visualization
 
 
-def Solve(func, action, dx, dy, particleQuantity, inertia, personalComponent, groupComponent):
+def Solve(objectiveFunction, optimizationAction, lb, ub, particleQuantity, inertiaComponent, personalComponent,
+          groupComponent):
     pso = PSO()
-    pso.functionToOptimize = func
-    pso.action = action
-    pso.deltaCoordinates = (dx, dy)
+    pso.objectiveFunction = objectiveFunction
+    pso.optimizationAction = optimizationAction
+    pso.lb = lb
+    pso.ub = ub
     pso.particleQuantity = particleQuantity
-    pso.inertia = inertia
+    pso.inertiaComponent = inertiaComponent
     pso.personalComponent = personalComponent
     pso.groupComponent = groupComponent
 
     pso.Initialize()
-
-    Visualizing.vusialize(pso)
+    Visualization.visualize(pso)
 
 
 def main():
     # borders of max/min search
-    dx = 10 * pi
-    dy = 10 * pi
+    lb = -2 * pi
+    ub = 2 * pi
 
     # define function fo maximize or minimize
-    func = lambda x, y: np.cos(np.square(x / 8) + np.square(y / 8))
-    action = True  # True -> maximize ; False -> minimize
+    objectiveFunction = lambda x, y: np.cos(x / 2) * np.sin(y / 2)
+    optimizationAction = False  # True -> maximize ; False -> minimize
 
     particleQuantity = 30  # number of agents in algorithm
-    inertia = 0.05  # velocity inertia coefficient
-    personalComponent = 0.15  # personal component coefficient
-    groupComponent = 1  # group componenet coefficient
+    inertiaComponent = 0.05  # velocity inertiaComponent coefficient
+    personalComponent = 0.2  # personal component coefficient
+    groupComponent = 1  # group component coefficient
 
-    Solve(func, action, dx, dy, particleQuantity, inertia, personalComponent, groupComponent)
+    Solve(objectiveFunction, optimizationAction, lb, ub, particleQuantity, inertiaComponent, personalComponent,
+          groupComponent)
 
 
 if __name__ == '__main__':

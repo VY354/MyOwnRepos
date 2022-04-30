@@ -12,9 +12,10 @@ from Particle import Particle
 @dataclass
 class PSO:
     # function to evaluate parameters
-    functionToOptimize: object = field(default=None, init=True)
-    action: bool = field(default=True, init=True)
-    deltaCoordinates: tuple = field(default=(pi, pi))
+    objectiveFunction: object = field(default=None, init=True)
+    optimizationAction: bool = field(default=True, init=True)
+    lb: float = field(default=0, init=True)
+    ub: float = field(default=0, init=True)
 
     # result parameters
     _resultPos: np.array = field(default=np.array([0, 0], dtype='float64'), init=False)
@@ -33,15 +34,13 @@ class PSO:
         self.conditionFunc = lambda act, x, y: ((x > y) if act else (x < y))
         self._particles = [Particle() for i in range(self.particleQuantity)]
         p: Particle
-        dx = self.deltaCoordinates[0]
-        dy = self.deltaCoordinates[1]
 
         # creating agents population;
         # set random position, velocity and best results
         for p in self._particles:
-            p.position = np.random.uniform(random.uniform(-dx, -dx), random.uniform(-dy, dy), 2)
+            p.position = np.random.uniform(random.uniform(self.lb, self.ub), random.uniform(self.lb, self.ub), 2)
             p.velocity = np.random.uniform(-1, 1, 2)
-            p.personalBestValue = self.functionToOptimize(*p.position)
+            p.personalBestValue = self.objectiveFunction(*p.position)
             p.personalBestPosition = p.position
 
     def Run(self):
@@ -65,6 +64,8 @@ class PSO:
                     p.personalBestPosition - p.position) + self.groupComponent * random.random() * (
                                  groupBestPos - p.position)
             p.position = p.position + p.velocity
+            p.position = np.array(list(map((lambda x: self.lb if x <= self.lb else (
+                self.ub if x >= self.ub else x)), p.position)))
             self.UpdatePB(p)
 
         # update results on current iteration
@@ -72,30 +73,27 @@ class PSO:
 
     def _GetGroupBest(self) -> np.array:
         bestPos = self._particles[0].position
-        fbest = self.functionToOptimize(*bestPos)
+        fbest = self.objectiveFunction(*bestPos)
 
         # finding best position by comparison all agents values
         for p in self._particles[1:]:
-            if self.conditionFunc(self.action, p.personalBestValue, fbest):
+            if self.conditionFunc(self.optimizationAction, p.personalBestValue, fbest):
                 fbest = p.personalBestValue
                 bestPos = p.personalBestPosition
         return bestPos
 
     def UpdatePB(self, p: Particle):
         # update personal bests depending on maximizing or minimizing function
-        funcVal = self.functionToOptimize(*p.position)
-        if self.conditionFunc(self.action, p.personalBestValue, funcVal):
+        funcVal = self.objectiveFunction(*p.position)
+        if self.conditionFunc(self.optimizationAction, p.personalBestValue, funcVal):
             p.personalBestValue = funcVal
             p.personalBestPosition = p.position
 
     def GetBestResultPos(self):
         # get average agents position and average result
         poses = np.array([p.position for p in self._particles])
-        avgPos = np.array([0, 0], dtype='float64')
-        for p in poses:
-            avgPos += p
-        avgPos /= self.particleQuantity
-        avgRes = np.array([self.functionToOptimize(*pos) for pos in poses]).mean()
+        avgPos = np.sum(poses, axis=0) / len(self._particles)
+        avgRes = self.objectiveFunction(*avgPos)
         return avgPos, avgRes
 
     def GetParticlesPositions(self):
@@ -107,22 +105,22 @@ class PSO:
 
 def test():
     pso = PSO()
-    pso.action = False
+
+    pso.objectiveFunction = lambda x, y: np.cos(x) * np.sin(y)
+    pso.optimizationAction = False
+    pso.lb = -2 * pi
+    pso.ub = 2 * pi
 
     pso.maxIterations = 100
-    pso.particleQuantity = 50
+    pso.particleQuantity = 30
 
-    pso.inertia = 0.5
-    pso.personalComponent = 1
-    pso.groupComponent = 3
-    pso.communicationDistance = 10
-
-    pso.functionToOptimize = lambda x, y: np.cos(x) * np.sin(y)
+    pso.inertia = 0.05
+    pso.personalComponent = 0.2
+    pso.groupComponent = 1
 
     pso.Initialize()
     pso.Run()
 
-    print('=================================================================')
     print(pso._resultPos, pso._resultValue)
 
 
