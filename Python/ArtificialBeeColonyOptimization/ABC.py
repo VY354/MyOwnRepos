@@ -9,26 +9,19 @@ from BeeAgent import Bee
 
 @dataclass
 class ABC:
-    # function to optimize
-    optimizationFunction: object = field(default=None, init=True)
-    # optimization problem
-    optimizationAction: bool = field(default=True)
-    # lower boundary
-    lb: float = field(default=0, init=True)
-    # upper boundary
-    ub: float = field(default=0, init=True)
-    # best solution
-    __bestSolution: list = field(default_factory=list, init=False)
+    
+    optimizationFunction: object = field(default=None, init=True) # function to optimize 
+    optimizationAction: bool = field(default=True) # optimization problem 
+    lb: float = field(default=0, init=True) # lower boundary
+    ub: float = field(default=0, init=True) # upper boundary
+    __bestSolution: list = field(default_factory=list, init=False) # best solution
 
-    # max iteration
-    maxIteration: int = field(default=0, init=True)
-    # number of bees
-    beesQuantity: int = field(default=0, init=True)
-    # max trial value
-    maxTrialValue: int = field(default=0, init=True)
+    
+    maxIteration: int = field(default=0, init=True) # max iteration
+    beesQuantity: int = field(default=0, init=True) # number of bees
+    maxTrialValue: int = field(default=0, init=True) # max trial value
 
-    # bees array
-    __bees: list = field(default_factory=list, init=False)
+    __bees: list = field(default_factory=list, init=False) # bees array
 
     # initialize bees
     def initialize(self):
@@ -51,7 +44,6 @@ class ABC:
         self.__employeePhase()
         self.__onlookerPhase()
         self.__memorizeBestSolution()
-        # print(list(map(lambda x: round(x, 3), self.__bestSolution[0])), round(self.__bestSolution[1], 3))
         self.__scoutPhase()
 
     # emoloyees bee phase
@@ -72,6 +64,7 @@ class ABC:
         # for curr. bee generate rand(0,1)
         # if rand <= curr food source prob.:
         # set this food source pos. to curr. bee pos.
+        # update Bee
         # food tracker ++
         # pop this food source from lost
         # go to next bee

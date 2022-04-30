@@ -10,7 +10,7 @@ def main():
         optimizationFunction=(lambda x, y: np.cos(x / 1.5) * np.sin(y / 1.5)),
         optimizationAction=False,
         lb=-2 * pi,
-        ub=2 * pi,
+        ub= 2 * pi,
         maxIteration=100,
         beesQuantity=30,
         maxTrialValue=5
