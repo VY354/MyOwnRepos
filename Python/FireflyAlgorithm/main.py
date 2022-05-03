@@ -7,19 +7,16 @@ import Visualization
 
 def main():
     fa = FA(
-        optimizationFunction=lambda x, y: np.cos(x / 2) * np.sin(y / 2),
+        optimizationFunction=lambda x, y: np.cos(x / 2 + 0.5) * np.sin(y / 2 + 0.5),
         optimizationAction=False,
         lb=-2 * pi,
         ub=2 * pi,
         iterationsNumber=100,
         firefliesQuantity=30,
-        gamma=20,
-        alpha=0.5)
+        gamma=0.15,
+        alpha=0.45)
 
     fa.initialize()
-    # fa.run()
-    # print(fa.getResult())
-
     Visualization.visualize(fa)
 
 

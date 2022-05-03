@@ -1,8 +1,12 @@
 from math import *
 import numpy as np
+
 from dataclasses import dataclass, field, fields, asdict, astuple
 
+import matplotlib.pyplot as plt
+
 from Firefly import Firefly
+
 
 @dataclass
 class FA:
@@ -35,7 +39,7 @@ class FA:
         defaultBrighness = 1
         for i in range(self.firefliesQuantity):
             # set random position within boundary
-            pos = np.array(list(map(lambda x: self.lb + x * (self.ub - self.lb), np.random.random(2))))
+            pos = np.array(list(map(lambda x: self.lb + x * (self.ub - self.lb), np.random.uniform(-1, 1, 2))))
             self.__fireflies.append(Firefly(pos, defaultBrighness))
         self.__findBestSolution()
 
@@ -45,7 +49,6 @@ class FA:
             self.__findBestSolution()
             print(self.__bestSolution)
 
-
     def iterate(self):
 
         # for each firefly
@@ -54,36 +57,22 @@ class FA:
         # calculate new position with respect to attractiveness of firefly,
         # update current firefly and go to next firefly
 
-        # we don't need compare with other partners, if already updated current firefly
-        # so, if updated current firefly, go to next firefly
-        goNextFirefly = True
-
         firefly: Firefly
         partner: Firefly
         for firefly in self.__fireflies:
-            goNextFirefly = False
             for partner in [f for f in self.__fireflies if f is not firefly]:
-                # indicate, that need go to next firefly
-                # if goNextFirefly == True:
-                #     break
-
                 if self.__compareBrightness(firefly, partner):
                     distance = np.linalg.norm(firefly.position - partner.position)
-                    partnerAttrarctiveness = partner.defaultAttractiveness * exp(-self.gamma * pow(distance, 2))
+                    partnerAttrarctiveness = partner.attractiveness * exp(-self.gamma * pow(distance, 2))
                     newPos = firefly.position + partnerAttrarctiveness * (
-                            firefly.position - partner.position) + self.alpha * np.random.random(2)
-                    firefly.position=newPos
+                            firefly.position - partner.position) + self.alpha * np.random.uniform(-1, 1, 2)
+                    firefly.position = newPos
                     newPos = self.__boundPosition(newPos)
                     self.__updateFirefly(firefly, newPos)
 
-                    goNextFirefly = True
-
-            # if goNextFirefly == False:
-            #     firefly.position =  self.__boundPosition(firefly.position + self.alpha * np.random.random(2))
-
-        # self.__findBestSolution()
+        self.__findBestSolution()
         bestFirefly = self.__findBestSolution()
-        bestFirefly.position += self.alpha * np.random.random(2)
+        bestFirefly.position += self.alpha * np.random.uniform(-1, 1, 2)
         bestFirefly.position = self.__boundPosition(bestFirefly.position)
 
     def __getBrightness(self, position: np.array):
@@ -92,8 +81,6 @@ class FA:
         # there could be different equation for I
 
         I = self.optimizationFunction(*position)
-        # I = 1/ (1 + exp(-self.optimizationFunction(*position)))
-        # I = exp(self.optimizationFunction(*position)/100) if self.optimizationAction else exp(-self.optimizationFunction(*position)/100)
         return I
 
     def __compareBrightness(self, firefly: Firefly, partner: Firefly):
@@ -108,13 +95,13 @@ class FA:
     def __updateFirefly(self, firefly: Firefly, newPos: np.array):
 
         # if newPos brightness greater than previous one,
-        # update firefly position
+        # update firefly position and attractiveness
 
         currBr = self.__getBrightness(firefly.position)
         newBr = self.__getBrightness(newPos)
         if self.conditionFunc(self.optimizationAction, newBr, currBr):
             firefly.position = newPos
-            # firefly.defaultAttractiveness=newBr
+            firefly.attractiveness = newBr
 
     def __findBestSolution(self):
         bestFirefly = self.__fireflies[0]
@@ -134,10 +121,9 @@ class FA:
         return [f.position for f in self.__fireflies]
 
     def getResult(self):
-        return  [list(map(lambda x:round(x,3),self.__bestSolution[0])),round(self.__bestSolution[1],3)]
+        return [list(map(lambda x: round(x, 3), self.__bestSolution[0])), round(self.__bestSolution[1], 3)]
 
 
-import matplotlib.pyplot as plt
 def main():
     fa = FA(
         optimizationFunction=lambda x, y: np.cos(x / 2) * np.sin(y / 2),
@@ -145,28 +131,22 @@ def main():
         lb=-2 * pi,
         ub=2 * pi,
         iterationsNumber=100,
-        firefliesQuantity=20,
-        gamma=20,
+        firefliesQuantity=30,
+        gamma=0.1,
         alpha=0.05)
-
-    fvals = []
-    itersNum=300
 
     fa.initialize()
 
+    results = []
+    itersNum = 200
     for i in range(itersNum):
         fa.iterate()
         res = fa.getResult()
-        fvals.append(res[1])
+        results.append(res[1])
 
-    # fa.run()
-
-    # res = fa.getResult()
-    # print(res)
-
-    fig = plt.figure(figsize=(10,7),dpi=100)
+    fig = plt.figure(figsize=(10, 7), dpi=100)
     ax = fig.add_subplot(111)
-    ax.plot(range(0,itersNum),fvals)
+    ax.plot(range(0, itersNum), results)
     plt.show()
 
 

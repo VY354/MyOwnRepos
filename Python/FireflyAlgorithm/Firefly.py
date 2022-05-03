@@ -6,7 +6,7 @@ from dataclasses import dataclass, field, fields, asdict, astuple
 @dataclass
 class Firefly:
     position: np.array = field(default_factory=np.array, init=True)
-    defaultAttractiveness: float = field(default=1, init=True)
+    attractiveness: float = field(default=1, init=True)
 
 
 def main():
