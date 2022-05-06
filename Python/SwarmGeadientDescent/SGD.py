@@ -13,19 +13,18 @@ from Particle import Particle
 concept idea:
 
 for each particle:
-    look around and choose the largest gradient;
+    look around and choose the best direction to move;
     it will show where to move
 
 find best solution
 
 for each particle:
     update position with rule:
-    x_new = x_old + gradCoeff * x_grad + bestRating * e^(-absorption * r^2) * (x_old - x_best), where:
+    x_new = x_old + moveDirCoeff * particle_moveDir + bestRating * e^(-absorption * r^2) * (x_old - x_best), where:
     
-    gradCoeff - coefficient for gradient multiplication,
+    moveDirCoeff - coefficient for move direction multiplication,
     bestRating - rating of best solution,
-    absorption - the further best solution, the lower priority to move to it (it controls "visability of other particles"),
-    r - distance to best solution,
+    gbCoeff - group best multiplier coefficient
     x_best - position of best solution
     
 """
@@ -52,10 +51,10 @@ class SGD:
     visionDistance: float = field(default=1)
     # number of points to check around
     checkPointNumber: int = field(default=8)
-    # sound absorption coefficient
-    absorption: float = field(default=1)
-    # gradient coefficient
-    gradCoeff: float = field(default=1)
+    # move direction coefficient
+    moveDirCoeff: float = field(default=1)
+    # group best coefficient multiplier
+    gbCoeff: float = field(default=1)
     # random movement coefficient
     randCoeff: float = field(default=1)
 
@@ -91,7 +90,7 @@ class SGD:
         # get point of curr pos + vision distance
         # check point around according to rotating angle
         # get point with highest rating
-        # save gradient value
+        # save moveDir value
 
         p: Particle
         for p in self.__particles:
@@ -100,29 +99,25 @@ class SGD:
 
             startPos = p.position + np.array([1, 0]) * self.visionDistance
             bestRating = self.__getRating(startPos)
-            # get gradient as derivatve rule ( f'(x) = [f(x+dx) - f(x)] / dx, dx -> 0 )
-            bestGrad = (startPos - p.position) / self.visionDistance
+            bestGrad = (startPos - p.position)
 
-            # check all other points and update best gradient
+            # check all other points and update best moveDir
             for i in range(1, self.checkPointNumber):
                 newPos = p.position + self.visionDistance * np.array([cos(i * deltaAngle), sin(i * deltaAngle)])
                 newRating = self.__getRating(newPos)
                 if self.conditionFunc(self.optimizationAction, newRating, bestRating):
-                    bestGrad = (newPos - p.position) / self.visionDistance
+                    bestGrad = (newPos - p.position)
                     bestRating = newRating
-            p.gradient = bestGrad
-
-        pass
+            p.moveDir = bestGrad
 
     def __update(self):
 
         # get best particle
         # update particles positions with rule:
-        # x_new = x_old + gradCoeff * x_grad + bestRating * e^(-absorption * r^2) * (x_old - x_best), where:
-        # gradCoeff - coefficient for gradient multiplication,
+        # x_new = x_old + moveDirCoeff * x_moveDir + gbCoeff * bestRating * (x_old - x_best) + randCoeff * randVector, where:
+        # moveDirCoeff - coefficient for moveDir multiplication,
+        # gbCoeff - group best multiplier coefficient
         # bestRating - rating of best solution,
-        # absorption - the further best solution, the lower priority to move to it (it controls "visability of other particles"),
-        # absorption - the further best solution, the lower priority to move to it (it controls "visability of other particles"),
         # r - distance to best solution,
         # x_best - position of best solution
 
@@ -131,13 +126,10 @@ class SGD:
         p: Particle
         for p in self.__particles:
             r = np.linalg.norm(p.position - bestParticle.position)
-            newPos = p.position + self.gradCoeff * p.gradient + bestRating * exp(
-                -self.absorption * r ** 2) * (p.position - bestParticle.position) + self.randCoeff * np.random.uniform(
+            newPos = p.position + self.moveDirCoeff * p.moveDir + self.gbCoeff * bestRating * (p.position - bestParticle.position) + self.randCoeff * np.random.uniform(
                 -1, 1, 2)
             newPos = self.__boundPosition(newPos)
             p.position = newPos
-
-        pass
 
     def __getRating(self, position: np.array):
         # can write other fuctions to evaluate rating R
@@ -180,18 +172,19 @@ class SGD:
 
 
 def main():
+    # optimizationAction: False -> min ; True -> max
     sgd = SGD(
-        optimizationFunction=lambda x, y: np.cos(x / 2) * np.sin(y / 2),
+        optimizationFunction=lambda x, y: np.cos(x / 3) * np.sin(y / 3) * np.exp(-(np.power(x / 15, 2) + np.power(y / 15, 2))),
         optimizationAction=False,
-        lb=-2 * pi,
-        ub=2 * pi,
+        lb=-5 * pi,
+        ub=5 * pi,
         iterationsNumber=100,
         particlesQuantity=30,
         visionDistance=0.01,
-        checkPointNumber=8,
-        absorption=0.5,
-        gradCoeff=0.01,
-        randCoeff=0.001
+        checkPointNumber=2 ** 3,
+        moveDirCoeff=1.5,
+        gbCoeff=0.025,
+        randCoeff=0.015
     )
 
     sgd.initialize()
@@ -199,15 +192,16 @@ def main():
     results = []
     itersNum = 100
     for i in range(itersNum):
-        sgd.iterate()
         res = sgd.getResult()
         results.append(res[1])
+        sgd.iterate()
 
     fig = plt.figure(figsize=(10, 7), dpi=100)
     ax = fig.add_subplot(111)
     ax.set_xlabel('iterations')
     ax.set_ylabel('objective function value')
-    ax.plot(range(0, itersNum), results)
+    ax.plot(range(0, itersNum), results, color='blue', linestyle='-', linewidth=2)
+    plt.grid(True)
     plt.show()
 
 

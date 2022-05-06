@@ -6,7 +6,7 @@ from dataclasses import dataclass, field, fields, asdict, astuple
 @dataclass
 class Particle:
     position: np.array = field(default_factory=np.array)
-    gradient: np.array = field(default=np.array([0,0]),init=False)
+    moveDir: np.array = field(default=np.array([0,0]),init=False)
 
 
 def main():

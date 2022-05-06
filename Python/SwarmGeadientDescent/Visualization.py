@@ -18,10 +18,10 @@ def visualize(sgd: SGD):
 
     fig = plt.figure(figsize=(10, 7), dpi=100)
     ax = fig.add_subplot(111, projection='3d')
-    ax.set_zlim((-3, 3))
+    ax.set_zlim((-pi * 2, pi * 2))
     ax.view_init(45, 45)
 
-    funcplot = ax.contour3D(x, y, z, 50, cmap=cm.get_cmap('rainbow'), alpha=0.3)
+    funcplot = ax.contour3D(x, y, z, 50, cmap=cm.get_cmap('rainbow'), alpha=0.4)
     scatFireFlies = ax.scatter([0], [0], [0], marker='o', color='black', s=20 * pi, alpha=1, edgecolors='white')
     iterText = ax.text2D(x=-0.12, y=0.1, s="iteration num")
     resPosText = ax.text2D(x=-0.12, y=0.1 - 0.01, s="reslut position")
