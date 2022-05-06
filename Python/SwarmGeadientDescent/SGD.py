@@ -12,19 +12,20 @@ from Particle import Particle
 
 concept idea:
 
-for each particle:
-    look around and choose the best direction to move;
+1. for each particle:
+    look around and choose the best direction to move
     it will show where to move
 
-find best solution
+2. get best solution
 
-for each particle:
+3. for each particle:
     update position with rule:
-    x_new = x_old + moveDirCoeff * particle_moveDir + bestRating * e^(-absorption * r^2) * (x_old - x_best), where:
+    x_new = x_old + moveDirCoeff * x_moveDir + gbCoeff * bestRating * (x_old - x_best) + randCoeff * randVector, where:
     
-    moveDirCoeff - coefficient for move direction multiplication,
-    bestRating - rating of best solution,
+    moveDirCoeff - coefficient for moveDir multiplication,
     gbCoeff - group best multiplier coefficient
+    bestRating - rating of best solution,
+    r - distance to best solution,
     x_best - position of best solution
     
 """
