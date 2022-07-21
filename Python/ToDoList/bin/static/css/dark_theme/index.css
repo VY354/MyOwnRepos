@@ -1,0 +1,16 @@
+.body-dark-mode {
+    background-color: black;
+}
+
+.dark-mode-btn.dark img {
+    content: url(../../icons/bulb_black.png);
+
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.dark-mode-btn.dark {
+    background-color: white;
+
+    box-shadow: 0px 0px 10px 1px rgb(201, 201, 201);
+}

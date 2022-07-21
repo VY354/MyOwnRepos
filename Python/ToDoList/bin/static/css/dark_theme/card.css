@@ -1,0 +1,29 @@
+/*======================== CARD ========================*/
+
+.card-item.head.dark {
+    background-color: white;
+}
+
+.card-item.head.dark .card-title {
+    color: black;
+}
+
+.card-item.body.dark {
+    background-color: rgb(37, 37, 37);
+
+    box-shadow: 0px 5px 10px 1px rgb(102, 102, 102);
+}
+
+.card-item.body.dark .card-text {
+    color: rgb(255, 255, 255);
+}
+
+/*======================== SLIDEBAR ========================*/
+
+.sidebar-done-dark-mode {
+}
+
+.sidebar-remove-dark-mode {
+}
+
+/*======================== HOVER EFFECTS ========================*/ ;

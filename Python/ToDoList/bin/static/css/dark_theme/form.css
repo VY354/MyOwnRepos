@@ -1,0 +1,26 @@
+.input-field.dark {
+    background-color: rgb(80, 80, 80);
+
+    box-shadow: 0px 5px 10px 1px rgb(114, 114, 114);
+
+    color: white;
+}
+
+.inp-label.title.dark img {
+    content: url(../../icons/label_white.png);
+}
+
+.inp-label.text.dark img {
+    content: url(../../icons/write_white.png);
+}
+
+.add-task-btn.dark {
+    background-color: rgb(119, 35, 255);
+
+    color: white;
+}
+
+.add-task-btn.dark:hover {
+    box-shadow: 0px 0px 10px 1px rgb(176, 126, 255);
+}
+/*======================== HOVER EFFECTS ========================*/

@@ -1,0 +1,101 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>ToDoList App</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/index.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/common.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/mainContainer.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/header.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/navbar.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/card.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/light_theme/form.css') }}" />
+
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/index.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/common.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/mainContainer.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/header.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/navbar.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/card.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', path='css/dark_theme/form.css') }}" />
+
+        <style>
+            .navbar-item a img {
+                content: url({{url_for('static',path='icons/back_white.png')}});
+
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .navbar-item.dark a img {
+                content: url({{url_for('static',path='icons/back_black.png')}});
+
+                max-width: 100%;
+                max-height: 100%;
+
+                background-color: rgb(31, 255, 151);
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <nav class="navbar">
+                <div class="navbar-item back">
+                    <a href="index.html"
+                        ><img id="back-img" src="" alt="img"
+                    /></a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main-container">
+            <form action="" id="card-form" name="card-form">
+                <div class="input-item">
+                    <label for="cardTitleInp" class="inp-label title">
+                        <img src="" alt="img" />
+                    </label>
+                    <input
+                        type="text"
+                        class="input-field title"
+                        name="title"
+                    />
+                </div>
+
+                <div class="input-item">
+                    <label for="cardTextInp" class="inp-label text"
+                        ><img src="" alt="img"
+                    /></label>
+                    <textarea
+                        type="text"
+                        class="input-field text"
+                        name="text"
+                    ></textarea>
+                </div>
+
+                <button
+                    class="add-task-btn"
+                    id="add-task-btn"
+
+                    type="submit"
+                    form="card-form"
+                    formmethod="post"
+                    formaction="/taskCreator.html/add"
+                >
+                    add new task
+                </button>
+            </form>
+        </main>
+
+        <button class="dark-mode-btn" onclick="toggleDarkMode()">
+            <img src="" alt="img" />
+        </button>
+
+        <script src="{{ url_for('static', path='js/darkMode.js') }}"></script
+    </body>
+</html>

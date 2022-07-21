@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 150px;
+}
+
+/*======================== COUNTERS ========================*/
+
+.task-counter {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+
+    width: 150px;
+}
+
+.task-counter > * {
+    text-align: center;
+
+    margin: 10px;
+
+    font-size: 2ch;
+}
+
+.counter-name {
+    font-weight: 200;
+}
+
+.counter-value {
+    font-weight: bold;
+}

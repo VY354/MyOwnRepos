@@ -1,0 +1,9 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: fit-content;
+
+    margin-top: 70px;
+}
