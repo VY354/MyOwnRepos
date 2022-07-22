@@ -3,15 +3,12 @@
 .card {
     display: flex;
     flex-direction: row;
-    /* justify-content: center; */
 
     align-self: center;
 
     height: fit-content;
 
     margin-bottom: 40px;
-
-    /* background-color: wheat; */
 
     transition: 1000ms ease-out;
 }
